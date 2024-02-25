@@ -34,9 +34,9 @@ public class MapGenerator : MonoBehaviour
     void CreateTileset()
     {
         tileset = new();
-        tileset.Add(0, Water);
+        tileset.Add(2, Water);
         tileset.Add(1, Sand);
-        tileset.Add(2, Grass);
+        tileset.Add(0, Grass);
     }
 
     void CreateTileGroups()
@@ -84,7 +84,6 @@ public class MapGenerator : MonoBehaviour
         float clamp_perlin = Mathf.Clamp01(raw_perlin); // Thanks: youtu.be/qNZ-0-7WuS8&lc=UgyoLWkYZxyp1nNc4f94AaABAg
         float scaled_perlin = clamp_perlin * tileset.Count;
 
-        // Replaced 4 with tileset.Count to make adding tiles easier
         if (scaled_perlin == tileset.Count)
         {
             scaled_perlin = (tileset.Count - 1);

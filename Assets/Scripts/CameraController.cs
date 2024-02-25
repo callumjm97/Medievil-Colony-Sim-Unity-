@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+
+    public float zoomSpeed = 1.0f; // Adjust this to control the speed of zooming
+    public float minZoom = 1f; // Minimum orthographic size
+    public float maxZoom = 10f; // Maximum orthographic size
+
     [SerializeField]
     private Camera cam;
 
@@ -22,5 +27,14 @@ public class CameraController : MonoBehaviour
 
             cam.transform.position += difference;
         }
+
+        // Zoom in with the scroll wheel
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        ZoomCamera(scroll * zoomSpeed);
+    }
+
+    void ZoomCamera(float increment)
+    {
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, minZoom, maxZoom);
     }
 }
